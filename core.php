@@ -152,7 +152,7 @@ function wp_oam_renderer_oam_short_code($attributes, $content = null)
     $pathinfo = pathinfo($attachment->guid);
 
     $source = sprintf('%s/%s/Assets/%s', $pathinfo['dirname'], $pathinfo['filename'], $metadata['htmlPath'][0]);
-    $iframe = sprintf('<iframe src="%s" width="%s" height="%s"></iframe>', $source, $attributes['width'], $attributes['height']);
+    $iframe = sprintf('<iframe src="%s" width="%s" height="%s" style="border:none"></iframe>', $source, $attributes['width'], $attributes['height']);
 
     return $iframe;
 }
