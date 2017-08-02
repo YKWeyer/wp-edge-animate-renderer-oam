@@ -129,27 +129,30 @@ function wp_oam_renderer_oam_short_code($attributes, $content = null)
     }
 
     $attributes = shortcode_atts(array(
-        'id'    => '',
-        'width' => 960,
-    ), $attributes);
+        'id' => '',
+        'width' => null,
+        'height' => null
+    ), $attributes, 'oam');
 
     $attachment = get_post($attributes['id']);
-    $metadata   = get_post_meta($attributes['id']);
+    $metadata = get_post_meta($attributes['id']);
 
     if (!$metadata) {
         return sprintf('[OAM ERROR => Cannot retrieve attachment with id "%s"]', $attributes['id']);
     }
 
-    $height = (int) $attributes['width'] * (int) $metadata['height'][0] / (int) $metadata['width'][0];
+    if (is_null($attributes['width'])) {
+        $attributes['width'] = $metadata['width'][0];
+    }
 
-    if (isset($attributes['height']) && $attributes['height']) {
-        $height = $attributes['height'];
+    if (is_null($attributes['height'])) {
+        $attributes['height'] = (int)$attributes['width'] * (int)$metadata['height'][0] / (int)$metadata['width'][0];
     }
 
     $pathinfo = pathinfo($attachment->guid);
 
     $source = sprintf('%s/%s/Assets/%s', $pathinfo['dirname'], $pathinfo['filename'], $metadata['htmlPath'][0]);
-    $iframe = sprintf('<iframe src="%s" width="%s" height="%s"></iframe>', $source, $attributes['width'], $height);
+    $iframe = sprintf('<iframe src="%s" width="%s" height="%s"></iframe>', $source, $attributes['width'], $attributes['height']);
 
     return $iframe;
 }
