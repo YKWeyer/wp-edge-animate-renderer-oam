@@ -1,0 +1,6 @@
+*.DS_Store
+._*
+.idea
+*.iml
+Thumbs.db
+$RECYCLE.BIN/
