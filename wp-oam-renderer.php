@@ -37,6 +37,11 @@ add_action('delete_attachment', 'wp_oam_renderer_delete_attachment');
  */
 add_shortcode('oam', 'wp_oam_renderer_oam_short_code');
 
+/*
+ * Enable the OAM shortcode on widgets
+ */
+add_filter('widget_text', 'wp_oam_widget_do_shortcode');
+
 /**
  * Displays HTML render code in "Insert media" window on post edit
  */

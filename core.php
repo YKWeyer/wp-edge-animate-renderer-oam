@@ -158,6 +158,30 @@ function wp_oam_renderer_oam_short_code($attributes, $content = null)
 }
 
 /**
+ * Replace OAM Shortcode on widget texts
+ *
+ * @param string $content Content to search for shortcodes
+ * @param bool $ignore_html When true, all square braces inside elements will be encoded.
+ *
+ * @return string Content with shortcodes filtered out.
+ */
+function wp_oam_widget_do_shortcode($content, $ignore_html = false)
+{
+
+    if (false === strpos($content, '[')
+        || strpos('[oam ', $content) == -1) {
+        return $content;
+    }
+
+    $content = do_shortcodes_in_html_tags($content, $ignore_html, ['oam']);
+
+    $pattern = get_shortcode_regex(['oam']);
+    $content = preg_replace_callback("/$pattern/", 'do_shortcode_tag', $content);
+
+    return $content;
+}
+
+/**
  * Displays OAM short code in an input element on "Insert media" window on post edit
  *
  * @param array    $form_fields A form fields array
