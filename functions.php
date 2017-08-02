@@ -4,6 +4,15 @@
  */
 
 /**
+ * Register style sheet.
+ */
+function register_oam_styles()
+{
+    wp_register_style('wp-edge-animate-renderer-oam', plugins_url('front.css', __FILE__));
+    wp_enqueue_style('wp-edge-animate-renderer-oam');
+}
+
+/**
  * Returns poster filename
  *
  * @param string $directory A directory to find poster file

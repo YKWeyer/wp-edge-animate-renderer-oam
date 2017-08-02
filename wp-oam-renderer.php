@@ -51,3 +51,8 @@ add_filter('attachment_fields_to_edit', 'wp_oam_renderer_edit_fields', 10, 2);
  * Displays icon in "Insert media" post edition popin
  */
 add_filter('wp_prepare_attachment_for_js', 'wp_oam_renderer_prepare_attachment_for_js', 10, 1);
+
+/*
+ * Append the CSS styles to the frontend
+ */
+add_action('wp_enqueue_scripts', 'register_oam_styles');

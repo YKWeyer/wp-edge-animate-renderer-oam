@@ -131,7 +131,9 @@ function wp_oam_renderer_oam_short_code($attributes, $content = null)
     $attributes = shortcode_atts(array(
         'id' => '',
         'width' => null,
-        'height' => null
+        'height' => null,
+        'href' => null,
+        'text' => null,
     ), $attributes, 'oam');
 
     $attachment = get_post($attributes['id']);
@@ -152,7 +154,15 @@ function wp_oam_renderer_oam_short_code($attributes, $content = null)
     $pathinfo = pathinfo($attachment->guid);
 
     $source = sprintf('%s/%s/Assets/%s', $pathinfo['dirname'], $pathinfo['filename'], $metadata['htmlPath'][0]);
-    $iframe = sprintf('<iframe src="%s" width="%s" height="%s" style="border:none"></iframe>', $source, $attributes['width'], $attributes['height']);
+    $iframe = sprintf('<iframe src="%s" width="%s" height="%s" class="oam-iframe"></iframe>', $source, $attributes['width'], $attributes['height']);
+
+
+    if (!is_null($attributes['href'])) {
+        $iframe = '<div class="oam-wrapper">' .
+            $iframe .
+            '<a href="' . $attributes['href'] . '" class="oam-link">' . ($attributes['text'] ?: $attributes['href']) . '</a>' .
+            '</div>';
+    }
 
     return $iframe;
 }
