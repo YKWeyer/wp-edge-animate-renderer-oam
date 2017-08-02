@@ -1,0 +1,23 @@
+{
+  "name": "wpackagist-plugin/wp-edge-animate-renderer-oam",
+  "description": "Allows and renders OAM Adobe Edge Animate files in posts.",
+  "authors": [
+    {
+      "name": "Thomas Vial",
+      "email": "thomas.vial@ekino.com"
+    },
+    {
+      "name": "Vincent Composieux",
+      "email": "vincent.composieux@ekino.com"
+    },
+    {
+      "name": "Damien Berseron",
+      "email": "damien.berseron@ekino.com"
+    }
+  ],
+  "homepage": "http://wordpress.org/plugins/wp-edge-animate-renderer-oam/",
+  "type": "wordpress-plugin",
+  "support": {
+    "forum": "https://github.com/ekino/wp-oam-renderer/issues"
+  }
+}
