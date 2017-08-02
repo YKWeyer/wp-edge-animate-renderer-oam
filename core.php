@@ -80,8 +80,8 @@ function wp_oam_renderer_add_attachment($identifier)
         $edges = simplexml_load_file(sprintf('%s/%s/%s', $directory, $output, $oamSource[0]));
         $edges->registerXPathNamespace('edge', 'http://openajax.org/metadata');
 
-        $width  = $edges->xpath('//edge:icon/@width');
-        $height = $edges->xpath('//edge:icon/@height');
+        $width  = $edges->xpath('//edge:icon/@width') ?: $edges->xpath('//edge:property[@name="default-width"]/@defaultValue');
+        $height = $edges->xpath('//edge:icon/@height') ?: $edges->xpath('//edge:property[@name="default-height"]/@defaultValue');
         $html   = (string) $edges->require['src'];
 
         // Adds width & height metadata to the OAM attachment
